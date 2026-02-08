@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "description": "Rewrite GitHub PR review comments into a friendly, professional tone using AI.",
   "permissions": [
-    "storage"
+    "storage",
+    "activeTab",
+    "tabs"
   ],
   "host_permissions": [
     "https://github.com/*",
@@ -13,7 +15,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/*"
+        "https://*/*",
+        "http://*/*"
       ],
       "js": [
         "src/content/injector.js",

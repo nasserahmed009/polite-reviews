@@ -10,6 +10,10 @@ export const MSG_REWRITE = 'REWRITE';
 // Chrome storage keys
 export const STORAGE_API_KEY = 'politeReviewsApiKey';
 export const STORAGE_API_BASE_URL = 'politeReviewsApiBaseUrl';
+export const STORAGE_ALLOWED_DOMAINS = 'politeReviewsAllowedDomains';
+
+// Default allowed domain (always on, cannot be removed)
+export const DEFAULT_DOMAIN = 'github.com';
 
 // Default API base (OpenAI)
 export const DEFAULT_API_BASE_URL = 'https://api.openai.com/v1';

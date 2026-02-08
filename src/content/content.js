@@ -1,11 +1,36 @@
 /**
  * Content script entry: observe DOM for comment textareas, inject "Polite comment" button.
  * Uses MutationObserver and delegates to injector; wires button click to messaging + textarea update.
+ * Only runs on allowed domains (github.com + user-added); exits immediately otherwise.
  */
 
+const DEFAULT_DOMAIN = 'github.com';
+const STORAGE_ALLOWED_DOMAINS = 'politeReviewsAllowedDomains';
 
+function isHostAllowed(hostname, allowedDomains) {
+  const normalized = (hostname || '').toLowerCase().trim();
+  if (!normalized) return false;
+  return allowedDomains.some(
+    (d) => normalized === d || normalized.endsWith('.' + d)
+  );
+}
 
-(function () {
+function getAllowedDomains() {
+  return new Promise((resolve) => {
+    chrome.storage.local.get([STORAGE_ALLOWED_DOMAINS], (result) => {
+      const custom = result[STORAGE_ALLOWED_DOMAINS] || [];
+      resolve([DEFAULT_DOMAIN, ...custom]);
+    });
+  });
+}
+
+(async function () {
+  const allowed = await getAllowedDomains();
+  const hostname = (location.hostname || '').toLowerCase().trim();
+  if (!isHostAllowed(hostname, allowed)) {
+    return;
+  }
+
   const BTN_LOADING = 'Polishing…';
 
   function handlePoliteClick(textarea, button) {
