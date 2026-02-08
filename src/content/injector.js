@@ -8,13 +8,13 @@ const DATA_ATTR_VALUE = 'inject';
 const CLASS_POLITE_BTN = 'polite-reviews-btn';
 const BTN_LABEL = 'Polite comment';
 const COMMENT_BUTTON_TEXTS = [
-  'comment',
-  'add single comment',
-  'reply',
   'submit review',
-  'add comment',
-  'review',
+  'start a review',
+  'add review comment',
 ];
+
+/** Tab labels we must not treat as submit buttons (e.g. "Preview" contains "review"). */
+const TAB_LIKE_TEXTS = ['preview', 'write', 'edit', 'preview changes'];
 
 /**
  * Normalize button text for comparison (trim, lowercase).
@@ -25,11 +25,15 @@ function normalizeButtonText(text) {
 
 /**
  * Check if a button is a GitHub comment submit button by its visible text.
+ * Excludes tab-style buttons (e.g. "Preview", "Write") so we inject next to the real actions.
  */
 function isCommentSubmitButton(btn) {
   if (!btn || (btn.tagName !== 'BUTTON' && btn.tagName !== 'INPUT')) return false;
   const text = normalizeButtonText(btn.textContent || btn.value || '');
-  return COMMENT_BUTTON_TEXTS.some((pattern) => text.includes(pattern) || pattern.includes(text));
+  if(!text) return false;
+
+  if (TAB_LIKE_TEXTS.some((tab) => text === tab || text.startsWith(tab + ' '))) return false;
+  return COMMENT_BUTTON_TEXTS.some((pattern) => text.includes(pattern));
 }
 
 /**
@@ -108,9 +112,9 @@ function tryInjectButton(textarea, onButtonClick) {
   });
 
   // Insert next to the submit button: same parent, after the submit button (or at end of button group)
-  const parent = submitButton.parentElement;
+  const parent = submitButton.parentElement?.parentElement;
   if (parent) {
-    parent.insertBefore(btn, submitButton.nextSibling);
+    parent.insertBefore(btn, submitButton.parentElement);
     return true;
   }
   container.appendChild(btn);
@@ -145,7 +149,3 @@ window.politeReviewsInjector = {
   CLASS_POLITE_BTN,
 };
 
-
-console.log('injector.js loaded');
-console.log(window.alert("hello"));
-window.hamada = "hllloooo";

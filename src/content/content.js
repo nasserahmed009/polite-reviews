@@ -18,7 +18,10 @@
       .requestRewrite(originalText)
       .then((result) => {
         if (result.success && result.text != null) {
-          textarea.value = result.text;
+          const politeText = result.text;
+          
+          textarea.value = politeText;
+          textarea.textContent = politeText;
         } else {
           showError(button, result.error || 'Could not rewrite.');
         }
