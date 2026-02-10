@@ -21,7 +21,7 @@ export const DEFAULT_API_BASE_URL = 'https://api.openai.com/v1';
 // DOM markers for our injected button (idempotent check)
 export const DATA_ATTR_INJECT = 'data-polite-reviews';
 export const DATA_ATTR_VALUE = 'inject';
-export const CLASS_POLITE_BTN = 'polite-reviews-btn';
+export const CLASS_POLITE_BTN = 'polite-reviews-btn Button Button--secondary';
 
 // Button label and loading text
 export const BTN_LABEL = 'Polite comment';

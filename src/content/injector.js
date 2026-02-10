@@ -5,7 +5,8 @@
 
 const DATA_ATTR_INJECT = 'data-polite-reviews';
 const DATA_ATTR_VALUE = 'inject';
-const CLASS_POLITE_BTN = 'polite-reviews-btn';
+const CLASS_POLITE_BTN = 'polite-reviews-btn Button Button--secondary';
+
 const BTN_LABEL = 'Polite comment';
 const COMMENT_BUTTON_TEXTS = [
   'submit review',
@@ -112,9 +113,9 @@ function tryInjectButton(textarea, onButtonClick) {
   });
 
   // Insert next to the submit button: same parent, after the submit button (or at end of button group)
-  const parent = submitButton.parentElement?.parentElement;
+  const parent = submitButton.parentElement;
   if (parent) {
-    parent.insertBefore(btn, submitButton.parentElement);
+    parent.insertBefore(btn, submitButton.nextSibling);
     return true;
   }
   container.appendChild(btn);

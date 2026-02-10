@@ -1,31 +1,11 @@
 /* Polite Reviews – button and loading state, GitHub-like */
-
-.polite-reviews-btn {
-  margin-left: 8px;
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-fg-muted, #57606a);
-  background-color: var(--color-canvas-subtle, #f6f8fa);
-  border: 1px solid var(--color-border-default, #d0d7de);
-  border-radius: 6px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.polite-reviews-btn:hover:not(:disabled) {
-  background-color: var(--color-canvas-subtle, #eaeef2);
-  border-color: var(--color-border-default, #d0d7de);
-}
-
-.polite-reviews-btn:disabled,
-.polite-reviews-btn.polite-reviews-loading {
-  cursor: not-allowed;
-  opacity: 0.8;
+div:has(> .polite-reviews-btn) {
+  /* to show both buttons side by side */
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  gap: 4px;
 }
 
 .polite-reviews-error {
-  margin-left: 8px;
-  font-size: 12px;
   color: var(--color-danger-fg, #cf222e);
 }
