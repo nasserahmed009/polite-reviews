@@ -41,8 +41,8 @@
       name.textContent = domain;
       const removeBtn = document.createElement('button');
       removeBtn.type = 'button';
-      removeBtn.className = 'secondary';
-      removeBtn.textContent = 'Remove';
+      removeBtn.className = 'text-xs';
+      removeBtn.textContent = '❌';
       removeBtn.addEventListener('click', function () {
         removeDomain(domain);
       });

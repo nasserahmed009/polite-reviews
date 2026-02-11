@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .status {
+    @apply mt-4 text-[13px];
+  }
+  .status.success {
+    @apply text-green-700;
+  }
+  .status.error {
+    @apply text-red-600;
+  }
+  .domain-row {
+    @apply flex items-center gap-2 mb-1.5;
+  }
+  .domain-name {
+    @apply flex-1;
+  }
+}

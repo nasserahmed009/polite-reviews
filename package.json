@@ -1,0 +1,10 @@
+{
+  "name": "polite-reviews",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i src/options/options.css -o src/options/options.bundle.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
