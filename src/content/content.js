@@ -47,6 +47,16 @@ function getAllowedDomains() {
           
           textarea.value = politeText;
           textarea.textContent = politeText;
+          
+          // Trigger React's synthetic events to update React's internal state
+          // This prevents React from restoring the original value on re-render
+          // React listens to 'input' events for controlled components
+          const inputEvent = new Event('input', { bubbles: true, cancelable: true });
+          textarea.dispatchEvent(inputEvent);
+          
+          // Also trigger 'change' event for compatibility
+          const changeEvent = new Event('change', { bubbles: true, cancelable: true });
+          textarea.dispatchEvent(changeEvent);
         } else {
           showError(button, result.error || 'Could not rewrite.');
         }
@@ -103,3 +113,4 @@ function getAllowedDomains() {
     run();
   }
 })();
+
